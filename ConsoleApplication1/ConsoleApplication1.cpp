@@ -11,42 +11,6 @@ union myun
     int k;
 }a;
 
-int main()
-{
-    //cout << "Hello World!\n";
-    //int var = 20;
-    //int* ip;
-    //ip = &var;
-    //cout << "Value of val varible:";
-    //cout << var << endl;
-
-    //cout << "Address stored in ip variable:";
-    //cout << ip << endl;
-
-    //cout << "Value of *ip variable:";
-    //cout << *ip << endl;
-
-    //a.u.x =4;
-    //a.u.y =5; 
-    //a.u.z =6; 
-    //a.k = 0; //覆盖掉第一个int空间值
-    //printf("%d %d %d %d\n",a.u.x,a.u.y,a.u.z,a.k);
-
-    //int age = 19;
-    //int* p_age = &age;
-    //*p_age = 20;
-
-    //printf("age = %d\n", *p_age);
-    //printf("age = %d\n", age);
-
-    /*
-
-    */
-    return 0;
-
-
-}
-
 /// <summary>
 /// 给你一个 升序排列的数组nums ，请你原地删除重复出现的元素，使每个元素只出现一次 ，返回删除后数组的新长度。元素的 相对顺序 应该保持 一致 。
 /// 由于在某些语言中不能改变数组的长度，所以必须将结果放在数组nums的第一部分。
@@ -109,17 +73,104 @@ int maxProfit(vector<int>& prices) {
 /// </summary>
 /// <param name="nums"></param>
 /// <param name="k"></param>
-void rotate(vector<int>& nums, int k) {
+void rotate1(vector<int>& nums, int k) {
 
-    int firstVal;
+    int n = nums.size();
+    k = k % n;
+    vector<int> orgNums;
 
-    for (size_t i = 0; i < k; i++)
+    for (int val : nums)
     {
-        firstVal = nums[0];
-        for (size_t j = 0; j < nums.size(); j++)
-        {
+        orgNums.push_back(val);
+    }
 
+    for (size_t i = 0; i < n; i++)
+    {
+        nums[(i + k) % n] = orgNums[i];
+    }
+}
+
+void reverseArr(vector<int>& nums, int startIndex, int endIndex) {
+    while (startIndex < endIndex) {
+        swap(nums[startIndex], nums[endIndex]);
+        startIndex++;
+        endIndex--;
+    }
+}
+
+/// <summary>
+/// 数组翻转方式实现
+/// </summary>
+/// <param name="nums"></param>
+/// <param name="k"></param>
+void rotate2(vector<int>& nums, int k) {
+
+    int n = nums.size();
+    k = k % n;
+    reverseArr(nums, 0, n - 1);
+    reverseArr(nums, 0, k - 1);
+    reverseArr(nums, k, n - 1);
+}
+
+void rotate3(vector<int>& nums, int k) {
+
+    int len = nums.size();
+    k %= len;
+    if (k == 0 || len == 1) return;
+    int temp;
+    temp = nums[0];
+    int count = 0;
+    for (int i = k, cnt = 0; cnt < len; i += k, cnt++)
+    {
+        int t = nums[i % len];
+        nums[i % len] = temp;
+        temp = t;
+        if (i % len == count)
+        {
+            count++;
+            i = count;
+            temp = nums[(i) % len];
         }
     }
+}
+
+int main()
+{
+    //cout << "Hello World!\n";
+    //int var = 20;
+    //int* ip;
+    //ip = &var;
+    //cout << "Value of val varible:";
+    //cout << var << endl;
+
+    //cout << "Address stored in ip variable:";
+    //cout << ip << endl;
+
+    //cout << "Value of *ip variable:";
+    //cout << *ip << endl;
+
+    //a.u.x =4;
+    //a.u.y =5; 
+    //a.u.z =6; 
+    //a.k = 0; //覆盖掉第一个int空间值
+    //printf("%d %d %d %d\n",a.u.x,a.u.y,a.u.z,a.k);
+
+    //int age = 19;
+    //int* p_age = &age;
+    //*p_age = 20;
+
+    //printf("age = %d\n", *p_age);
+    //printf("age = %d\n", age);
+
+    /*
+
+    */
+    vector<int> nums = { 1,2,3,4,5,6,7 };
+
+    rotate3(nums, 3);
+
+    return 0;
+
+
 }
 
