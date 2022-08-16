@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 union myun
@@ -134,6 +135,39 @@ void rotate3(vector<int>& nums, int k) {
     }
 }
 
+/// <summary>
+/// 判断同一数组中任意个元素是否出现至少两次则返回true,
+/// 否则返回false
+/// </summary>
+/// <param name="nums"></param>
+/// <returns></returns>
+bool containsDuplicate(vector<int>& nums) {
+    sort(nums.begin(), nums.end());
+
+    for (size_t i = 0; i < nums.size() - 1; i++)
+    {
+        if (nums[i] == nums[i + 1])
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/// <summary>
+/// 异或
+/// </summary>
+/// <param name="nums"></param>
+/// <returns></returns>
+int singleNumber(vector<int>& nums) {
+    int val = 0;
+    for (int num : nums)
+    {
+        val ^= num;
+    }
+    return val;
+}
+
 int main()
 {
     //cout << "Hello World!\n";
@@ -165,8 +199,8 @@ int main()
     /*
 
     */
-    vector<int> nums = { 1,2,3,4,5,6,7 };
-
+    vector<int> nums = { 1,2,3,4,5,6,7,1 };
+    bool bRet = containsDuplicate(nums);
     rotate3(nums, 3);
 
     return 0;
