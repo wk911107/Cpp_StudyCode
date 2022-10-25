@@ -478,6 +478,29 @@ bool isAnagram(string s, string t) {
 /// <param name="s"></param>
 /// <returns></returns>
 bool isPalindrome(string s) {
+    
+    int left = 0;
+    int right = s.length() - 1;
+
+    while (left < right)
+    {
+        while (left < right && !isalnum(s[left]))
+            left++;
+        while (left < right && !isalnum(s[right]))
+            right--;
+
+        if (toupper(s[left]) != toupper(s[right]))
+        {
+            return false;
+        }
+        left++;
+        right--;
+    }
+
+    return true;
+}
+
+int myAtoi(string s) {
 
 }
 
@@ -509,21 +532,19 @@ int main()
     //printf("age = %d\n", *p_age);
     //printf("age = %d\n", age);
 
-    /*
-
-    */
     //vector<int> nums = { 1,0,0,4,5,0,7,1 };
     //bool bRet = containsDuplicate(nums);
     //rotate3(nums, 3);
     //moveZeroes(nums);
 
+    //vector<vector<int>> matrix = { {1,2,3},{4,5,6},{7,8,9} };
 
-    vector<vector<int>> matrix = { {1,2,3},{4,5,6},{7,8,9} };
-
-    rotate(matrix);
+    //rotate(matrix);
 
 
-    reverse(-123);
+    //reverse(-123);
+
+    isPalindrome(" ");
 
     return 0;
 
