@@ -500,8 +500,9 @@ bool isPalindrome(string s) {
     return true;
 }
 
-int myAtoi(string s) {
-
+int myAtoi(string s)
+ {
+    return 0;
 }
 
 int main()
